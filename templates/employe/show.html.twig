@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detail de : {{employe.prenom}} {{employe.nom}}{% endblock %}
+
+{% block body %}
+
+<section class="py-5">
+
+    <h1 class="mb-4">Detail de l'employé {{employe.prenom}} {{employe.nom}}:</h1>
+
+    <ul class="list-unstyled ps-4">
+        <li>
+            <strong>Date de naissance :</strong> {{employe.dateNaissance|date("d-m-Y") }} ({{employe.getAge()}} ans)
+        </li>
+        <li>
+            <strong>Lieu d'habitation :</strong> {{employe.ville}}
+        </li>
+        <li>
+            <strong>Date d'Embauche :</strong> {{employe.dateEmbauche|date("d-m-Y")}}
+        </li>
+
+        <li> 
+            <strong>Entreprise :</strong> 
+            <a href="{{ path('show_entreprise', {'id': employe.entreprise.id}) }}">{{employe.entreprise}}</a>
+        </li>
+    </ul>
+    <a href="{{ path('app_employe') }}" class="btn btn-warning ms-4">Retour à la liste des employés</a>
+
+
+</section>
+{% endblock %}

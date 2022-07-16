@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des entreprises!{% endblock %}
+
+{% block body %}
+<section id="list-entreprises" class="py-5">
+
+    <h1 class="mb-3">Liste des entreprises</h1>
+
+    <ul class="list-unstyled">
+        {% for entreprise in entreprises %}
+        
+            <li>
+                <a href="{{ path('show_entreprise', {'id': entreprise.id}) }}">{{entreprise}}</a> situé <span class="fw-bold"> {{entreprise.adresse}} </span>
+
+                <a class="btn btn-primary" href="{{ path('edit_entreprise', {'id': entreprise.id}) }}">Modifier</a>
+
+                <a class="btn btn-danger" href="{{ path('delete_entreprise', {'id': entreprise.id}) }}">Supprimer</a>
+            </li>
+            
+        {% endfor %}
+    </ul>
+
+    <a class="btn btn-warning mt-4" href="{{ path('add_entreprise') }}">Ajouter une nouvelle entreprise</a>
+        
+
+</section>
+{% endblock %}
+    

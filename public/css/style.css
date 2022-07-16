@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+header .navbar-collapse {
+  flex-grow: 0.95;
+}
+header .navbar-nav {
+  width: 35%;
+  justify-content: space-between;
+}
+
+#list-entreprises ul, #list-employes ul {
+  line-height: 60px;
+}
+
+#add-entreprise form, #add-employee form {
+  line-height: 34px;
+}
+
+#detail-commentaire {
+  border: #2c3e50 solid 1px;
+  border-radius: 10px;
+  max-width: 640px;
+}
+#detail-commentaire #autor-container {
+  max-width: 100%;
+  border-bottom: 0.0625rem dotted #e0e0e0;
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+#commentaire {
+  padding: 30px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 15px;
+}
+#commentaire form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+#commentaire form ul {
+  padding: 0px;
+}
+#commentaire form ul li {
+  list-style: none;
+  color: red;
+}
+#commentaire #commentaire_note {
+  width: 65px;
+}/*# sourceMappingURL=style.css.map */

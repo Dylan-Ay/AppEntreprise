@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detail de l'entreprise {{entreprise.raisonSociale }} {% endblock %}
+
+{% block body %}
+
+{# <-------------- SECTION DETAIL-ENTREPRISE --------------> #}
+<section id="detail-entreprise" class="py-5">
+
+    <h1 class="mb-4">Detail de l'entreprise {{entreprise.raisonSociale}}:</h1>
+
+    <ul class="list-unstyled ps-4">
+        <li>
+            <span class="fw-bold">Siret : </span> {{entreprise.siret}}
+        </li>
+        <li>
+            <span class="fw-bold">Adresse :</span> {{entreprise.getFullAdress()}}
+        </li>
+
+        <li>
+            <span class="fw-bold">Date de création :</span> {{entreprise.dateCreation|date("d-m-Y")}}
+        </li>
+    </ul>
+
+    <ul class="list-unstyled ps-4">
+       <span class="fw-bold">Listes des employés :</span> 
+
+        {% if entreprise.employes | length > 0 %}
+            {% for employe in entreprise.employes %}
+            <li class="ps-3">- <a href="{{ path('show_employe', {'id': employe.id}) }}">{{employe}}</a></li>
+            {% endfor %}
+        {% else %}
+            <p>Aucun employé n'est enregistré dans cette entreprise.</p>
+        {% endif %}
+
+    </ul>
+</section>
+
+{# <-------------- SECTION COMMENTAIRES --------------> #}
+
+<h4 class="mb-4">Commentaires :</h4>
+{% if entreprise.commentaires |length <= 0 %}
+    <span class=" d-block pb-5">Aucun commentaire n'a encore été posté</span>
+{% else %}
+
+<section id="commentaires" class="pb-5 d-flex flex-column gap-3">
+        {% for commentaire in entreprise.commentaires %}
+
+        <article id="detail-commentaire">
+            <small id="autor-container" class="d-flex flex-column p-3">              
+                <p class="d-flex  justify-content-between">
+                    <span>Auteur : {{commentaire.auteur}}</span>
+                    <span>Note attribué : {{commentaire.getNoteToStars | raw}}</span>
+                </p>
+                <p class=""> 
+                    Le {{commentaire.createdAt | format_datetime('full', locale='fr') }}
+                </p>
+            </small>
+
+            <div class="message-content p-3">
+                <span class="fw-bold">Message:</span> 
+                <p> {{commentaire.contenu}} </p>
+            </div>
+        </article>
+        <hr>
+
+        {% endfor %}
+{% endif %}
+</section>
+
+<h4 class="mb-4">Ajouter un nouveau commentaire :</h4>
+<div id="commentaire">
+
+    {{ form_start (formAddComment) }}   
+
+        {{ form_row(formAddComment.auteur, {'attr': {'class': 'form-control'}} ) }}
+
+        {{ form_row(formAddComment.contenu, {'attr': {'class': 'form-control', 'rows': '5' }} ) }}
+
+        {{ form_row(formAddComment.note, {'attr': {'class': 'form-control', 'max': '5', 'min': '1'}}) }}
+        
+        {{ form_row(formAddComment.Ajouter, {'attr': {'class': 'btn btn-warning'}})}}
+
+    {{ form_end (formAddComment)}}
+
+</div>
+    <a href="{{ path('app_entreprise') }}" class="btn btn-warning my-5">Retour à la liste des entreprises</a>
+
+{% endblock %}

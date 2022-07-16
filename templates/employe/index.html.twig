@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des employés{% endblock %}
+
+{% block body %}
+
+<section id="list-employes" class="py-5">
+
+    <h1 class="mb-3">Liste des employés</h1>
+    {# J'utilise path qui récupère le name de la route et ensuite le paramètre employe/{id} #}
+
+    <ul class="list-unstyled">
+        {% for employe in employes %}
+        
+            <li>
+                <a href="{{ path('show_employe', {'id': employe.id}) }}">{{employe}}</a> est employé par <span class="fw-bold"> {{employe.entreprise}} </span>
+
+                <a class="btn btn-primary" href="{{ path('edit_employe', {'id': employe.id}) }}">Modifier</a>
+
+                <a class="btn btn-danger" href="{{ path('delete_employe', {'id': employe.id}) }}">Supprimer</a>
+            </li>
+            
+        {% endfor %}
+    </ul>
+
+    <a class="btn btn-warning mt-4" href="{{ path('add_employe')}}">Ajouter un nouvel employé</a>
+
+</section>
+{% endblock %}

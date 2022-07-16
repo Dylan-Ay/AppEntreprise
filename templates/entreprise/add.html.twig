@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout d'une entreprise{% endblock %}
+
+{% block body %}
+
+<section id="add-entreprise" class="py-5">
+
+    {% if edit %}
+        <h1 class="mb-3">Editer une entreprise</h1>
+        {% else %}
+        <h1 class="mb-3">Ajouter une entreprise</h1>      
+    {% endif %}
+    
+    {# Affiche le formulaire récupéré depuis le controler d'Entreprise #}
+    {{form (formAddEntreprise)}}
+
+</section>
+
+{% endblock %}
+    
